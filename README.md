@@ -117,6 +117,8 @@ Enable with the sidebar toggle to get:
 ├── requirements_dashboard.txt      # Python dependencies
 ├── .env                            # API keys (not in git)
 └── README.md                       # This file
+── demo.mp4                        # demo
+
 ```
 
 ---
@@ -238,45 +240,7 @@ Confidence: High (sunny conditions)
 
 ---
 
-## 🚦 Status Indicators
 
-| Component | Status | Notes |
-|-----------|--------|-------|
-| Core Application | ✅ Working | Tested and validated |
-| Weather API | ✅ Working | Requires valid API key |
-| ML Model | ✅ Working | Pre-trained XGBoost |
-| Gemini AI | ✅ Working | Requires API key |
-| Claude AI | ✅ Working | Requires API key |
-| GPT-4 AI | ✅ Working | Requires API key |
 
----
 
-## 🔄 Next Steps
 
-1. **First Run**: Test with demo location (Sfax, Tunisia)
-2. **Add Your Location**: Update to your solar site
-3. **Fine-tune Model**: Retrain with your local historical data
-4. **Set Up Alerts**: Integrate with your monitoring system
-5. **Deploy**: Host on cloud (Heroku, Azure, AWS)
-
----
-
-## 💬 Support
-
-For issues or questions:
-1. Check the troubleshooting section above
-2. Review `config.py` for configuration options
-3. Check browser console (F12) for errors
-4. Enable debug logging: `streamlit run app.py --logger.level=debug`
-
----
-
-## 📝 License
-
-This project is provided as-is for educational and commercial use.
-
----
-
-**Last Updated**: December 18, 2025  
-**Python Version**: 3.8+  
-**Framework**: Streamlit 1.28.1

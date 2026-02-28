@@ -81,17 +81,17 @@ def main():
     """Main dashboard application"""
     
     # Header
-    st.title("☀️ PV Production Forecasting Dashboard")
+    st.title(" PV Production Forecasting Dashboard")
     st.markdown("Real-time solar production predictions with weather integration")
     
     # Initialize components
     model_manager, prediction_engine, model_status = initialize_components()
     
     # Sidebar configuration
-    st.sidebar.title("⚙️ Configuration")
+    st.sidebar.title(" Configuration")
     
     # Location input
-    st.sidebar.subheader("📍 Location")
+    st.sidebar.subheader(" Location")
     col1, col2 = st.sidebar.columns([3, 1])
     with col1:
         city = st.text_input("City Name", value="Sfax", key="city_input").strip()
@@ -100,16 +100,16 @@ def main():
     
     # Show tip for city selection
     with st.sidebar:
-        st.caption("💡 Tip: Use exact city spelling (e.g., 'Hammamet' not 'hammemet')")
+        st.caption(" Tip: Use exact city spelling (e.g., 'Hammamet' not 'hammemet')")
     
     # Model status
-    st.sidebar.subheader("🤖 Model Status")
+    st.sidebar.subheader(" Model Status")
     st.sidebar.info(f"Status: {model_status}")
     
     # Note: AI Decision Agent feature has been disabled
     
     # Fetch button
-    if st.sidebar.button("🔄 Fetch Weather & Predict", use_container_width=True):
+    if st.sidebar.button(" Fetch Weather & Predict", use_container_width=True):
         st.session_state['fetch_data'] = True
     
     # Main content
@@ -125,11 +125,11 @@ def main():
                 
                 if current_result['status'] == 'error':
                     error_msg = current_result.get('message', 'Unknown error')
-                    st.error(f"❌ Weather API Error: {error_msg}")
+                    st.error(f" Weather API Error: {error_msg}")
                     
                     # Provide helpful diagnostics
                     if '404' in error_msg:
-                        st.warning(f"⚠️ Location not found: '{city}, {country}'")
+                        st.warning(f" Location not found: '{city}, {country}'")
                         st.info("**Try these fixes:**\n"
                                 "1. Check spelling (e.g., 'Hammamet' not 'hammemet')\n"
                                 "2. Use major cities (API free tier has limited coverage)\n"
@@ -169,11 +169,11 @@ def main():
                 st.session_state['forecast_formatted'] = forecast_formatted
                 st.session_state['forecast_predictions'] = forecast_predictions
                 st.session_state['fetch_data'] = False
-                st.success("✓ Data fetched successfully!")
+                st.success(" Data fetched successfully!")
                 st.rerun()
             
             except Exception as e:
-                st.error(f"❌ Error: {str(e)}")
+                st.error(f" Error: {str(e)}")
                 st.info("Make sure you have set WEATHER_API_KEY in your .env file")
                 return
     
@@ -186,7 +186,7 @@ def main():
         current_formatted = st.session_state['current_formatted']
         
         # Current Weather Section
-        st.subheader("🌤️ Current Weather & Production")
+        st.subheader(" Current Weather & Production")
         
         col1, col2, col3, col4, col5 = st.columns(5)
         
@@ -226,12 +226,12 @@ def main():
             )
         
         # Weather Description
-        st.info(f"🌤️ **Condition:** {current_weather['condition']} - {current_weather['description']}")
+        st.info(f" **Condition:** {current_weather['condition']} - {current_weather['description']}")
         
         st.divider()
         
         # Predictions & Forecast
-        st.subheader("📈 Production Forecast - Next 24 Hours")
+        st.subheader(" Production Forecast - Next 24 Hours")
         
         # Prepare forecast dataframe
         forecast_df = pd.DataFrame({
@@ -278,7 +278,7 @@ def main():
         st.plotly_chart(fig_power, use_container_width=True)
         
         # Forecast table
-        st.subheader("📊 Detailed Forecast Table")
+        st.subheader(" Detailed Forecast Table")
         display_df = forecast_df.copy()
         display_df['Time'] = display_df['Time'].dt.strftime('%Y-%m-%d %H:%M')
         display_df['Predicted Power (kW)'] = display_df['Predicted Power (kW)'].round(3)
@@ -290,13 +290,13 @@ def main():
         st.divider()
         
         # Power Analysis
-        st.subheader("⚡ Power Production Analysis")
+        st.subheader(" Power Production Analysis")
         display_simple_analysis(current_prediction, forecast_predictions, current_formatted)
         
         st.divider()
         
         # Weather Forecast Visualization
-        st.subheader("🌡️ Weather Forecast")
+        st.subheader(" Weather Forecast")
         
         col1, col2 = st.columns(2)
         
@@ -341,7 +341,7 @@ def main():
             st.plotly_chart(fig_clouds, use_container_width=True)
         
         # Summary Statistics
-        st.subheader("📊 Statistics")
+        st.subheader(" Statistics")
         
         col1, col2, col3, col4 = st.columns(4)
         
@@ -375,14 +375,14 @@ def main():
     
     else:
         # Initial state
-        st.info("👈 Please configure your location in the sidebar and click 'Fetch Weather & Predict' to begin")
+        st.info(" Please configure your location in the sidebar and click 'Fetch Weather & Predict' to begin")
         
         # Info cards
         col1, col2, col3 = st.columns(3)
         
         with col1:
             st.markdown("""
-            ### 🌍 Weather Integration
+            ###  Weather Integration
             - Real-time weather data from OpenWeatherMap
             - Irradiation estimation based on cloud coverage
             - 48-hour forecast for planning
@@ -390,7 +390,7 @@ def main():
         
         with col2:
             st.markdown("""
-            ### 📊 Intelligent Predictions
+            ###  Intelligent Predictions
             - Fine-tuned XGBoost model
             - Exogenous variables (temperature, humidity, wind)
             - Hour-by-hour production forecast
@@ -398,22 +398,14 @@ def main():
         
         with col3:
             st.markdown("""
-            ### 📊 Data Analysis
+            ###  Data Analysis
 
             - Power production trends
             - Weather pattern analysis
             - Forecast accuracy metrics
             """)
         
-        st.warning("⚠️ Setup Required:")
-        st.markdown("""
-        1. **Weather API Key**: Set `WEATHER_API_KEY` in `.env` file
-           - Get free key from [OpenWeatherMap](https://openweathermap.org/api)
-        2. **LLM API Key** (Optional, pick one): 
-           - For Gemini: Set `GEMINI_API_KEY` (recommended, free tier available)
-           - For Claude: Set `ANTHROPIC_API_KEY`
-           - For GPT-4: Set `OPENAI_API_KEY`
-        """)
+        
 
 def display_simple_analysis(current_prediction: float, forecast_predictions: list, current_formatted: dict):
     """Display simple power production analysis"""
@@ -436,7 +428,7 @@ def display_simple_analysis(current_prediction: float, forecast_predictions: lis
         st.metric("Peak Forecast", f"{max_forecast:.2f} kW")
     
     # Analysis details
-    st.subheader("📊 Production Analysis")
+    st.subheader(" Production Analysis")
     
     col1, col2 = st.columns(2)
     

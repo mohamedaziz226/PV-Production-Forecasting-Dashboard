@@ -1,7 +1,4 @@
-"""
-Weather API Integration for PV Production Dashboard
-Fetches weather data and forecast from OpenWeatherMap API
-"""
+# config
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
